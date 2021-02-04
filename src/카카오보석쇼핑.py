@@ -18,7 +18,6 @@ def solution(gems):
                 if shopping[gems[j]] == 0:
                     del (shopping[gems[j]])
                     break
-                start = j
     candidates.sort(key=lambda x: (x[0], x[1][0]))
     return candidates[0][1]
 
