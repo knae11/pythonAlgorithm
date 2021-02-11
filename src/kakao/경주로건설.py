@@ -1,5 +1,3 @@
-import copy
-
 answer = 10e9
 
 
@@ -25,10 +23,10 @@ def dfs(board, pos, n, cost_board):
         if board[nx][ny] == 0 and cost_board[nx][ny] >= cost:
             if nd % 2 == dir % 2:
                 curr = ((nx, ny), dir, cost + 1)
-                cost_board[nx][ny] = cost + 1
+                cost_board[nx][ny] = min(cost_board[nx][ny], cost + 1)
             if nd % 2 != dir % 2:
                 curr = ((nx, ny), nd, cost + 6)
-                cost_board[nx][ny] = cost + 6
+                cost_board[nx][ny] = min(cost_board[nx][ny], cost + 6)
             dfs(board, curr, n, cost_board)
 
 
