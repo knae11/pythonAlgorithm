@@ -1,16 +1,19 @@
 answer = 10e9
 
-
 def dfs(board, pos, n, cost_board):
     x, y = pos[0][0], pos[0][1]
     dir = pos[1]
     cost = pos[2]
     global answer
+    # dfs 종료조건✨
+    # 마지막에 도착때 answer을 갱신해줌
     if pos[0] == (n, n):
         answer = min(answer, pos[2] * 100)
         return
+    # cost가 answer보다 커지는 경우 최솟값이 벗어난 경우므로 return
     if cost > answer:
         return
+    # cost_board보다 cost가 커지는 경우 최솟값이 벗어난 경우므로 return
     if cost_board[x][y] < cost:
         return
     direction = [0, 1, 2, 3]
@@ -20,12 +23,14 @@ def dfs(board, pos, n, cost_board):
         nx = x + dx[i]
         ny = y + dy[i]
         nd = direction[i]
-        if board[nx][ny] == 0 and cost_board[nx][ny] >= cost:
+        if board[nx][ny] == 0:
             if nd % 2 == dir % 2:
                 curr = ((nx, ny), dir, cost + 1)
+                # visited를 사용하는 대신 cost_board를 min값으로 유지시켜줌✨
                 cost_board[nx][ny] = min(cost_board[nx][ny], cost + 1)
             if nd % 2 != dir % 2:
                 curr = ((nx, ny), nd, cost + 6)
+                # visited를 사용하는 대신 cost_board를 min값으로 유지시켜줌✨
                 cost_board[nx][ny] = min(cost_board[nx][ny], cost + 6)
             dfs(board, curr, n, cost_board)
 
