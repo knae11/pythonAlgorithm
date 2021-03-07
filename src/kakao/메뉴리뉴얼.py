@@ -1,4 +1,5 @@
 from itertools import combinations
+from collections import defaultdict
 
 def solution(orders, course):
     answer = []
@@ -8,7 +9,7 @@ def solution(orders, course):
             menu_list.add(menu)
 
     for r in course:
-        candidates = []
+        candidates = defaultdict(list)
         max_value = 0
         for combination in combinations(menu_list, r):
             menu = set(combination)
@@ -21,14 +22,12 @@ def solution(orders, course):
 
             if count < 2 or count < max_value:
                 continue
+
             menu_combi = "".join(sorted(menu))
-            candidates.append((menu_combi, count))
+            candidates[count].append(menu_combi)
         if not candidates:
             continue
-        for candidate in sorted(candidates, key=lambda x : -x[1]):
-            if candidate[1] != max_value:
-                break
-            answer.append(candidate[0])
+        answer += candidates[max_value]
     return sorted(answer)
 
 
