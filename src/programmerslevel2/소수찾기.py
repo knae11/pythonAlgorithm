@@ -5,8 +5,6 @@ import math
 def isPrime(primes, combi):
     string = ""
     for i in range(len(combi)):
-        if i == 0 and combi[i] == 0:
-            return 0
         string += combi[i]
     number = int(string)
     if number in primes:
