@@ -1,5 +1,6 @@
 import heapq
 
+# 다익스트라 알고리즘 - 1점에서 모든 점까지의 최단거리 구하는 알고리즘
 def solution(N, road, K):
     answer = 0
     INF = 1e9
