@@ -1,5 +1,6 @@
 import re
-from itertools import  product
+from itertools import product
+
 
 def solution(user_id, banned_id):
     answer_list = list()
