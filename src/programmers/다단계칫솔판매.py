@@ -1,5 +1,5 @@
 def ten_percent(money):
-    return int(money / 10)
+    return money // 10
 
 
 def solution(enroll, referral, seller, amount):
@@ -18,10 +18,6 @@ def solution(enroll, referral, seller, amount):
         earn = amount[i] * 100
         self = seller[i]
         outcomes[self].append(earn)
-        if trees[self] == "-":
-            outcome = ten_percent(earn)
-            outcomes[self][-1] = (earn - outcome)
-            continue
         while True:
             parent = trees[self]
             outcome = ten_percent(earn)
