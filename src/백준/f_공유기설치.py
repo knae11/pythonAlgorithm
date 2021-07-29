@@ -1,23 +1,19 @@
 import sys
 
-
+sys.setrecursionlimit(10**6)
 def input():
     return sys.stdin.readline().rstrip()
 
 
 N, M = map(int, input().split())
-
-homes = []
+min_home = 1e9
+max_home = 0
+homes = set()
 for _ in range(N):
-    homes.append(int(input()))
-
-
-homes.sort()
-
-lines = [0] * (homes[-1] + 1)
-for home in homes:
-    lines[home] = 1
-
+    num = int(input())
+    homes.add(num)
+    min_home = min(min_home, num)
+    max_home = max(max_home, num)
 answer = 1e9
 
 
@@ -25,9 +21,9 @@ def find_closest(mid):
     left_mid = mid
     right_mid = mid
     while True:
-        if lines[left_mid] == 1:
+        if left_mid in homes:
             return left_mid
-        if lines[right_mid] == 1:
+        if right_mid in homes:
             return right_mid
         left_mid -= 1
         right_mid += 1
@@ -38,9 +34,9 @@ def install_wifi(start, end, count):
     if count < 1:
         return
     mid = (start + end) // 2
-    if start >= mid or end <= mid:
+    if start >= mid or end < mid:
         return
-    if lines[mid] == 1:
+    if mid in homes:
         answer = min(answer, end - mid, mid - start)
         install_wifi(start, mid, count - 1)
         install_wifi(mid + 1, end, count - 1)
@@ -51,6 +47,6 @@ def install_wifi(start, end, count):
         install_wifi(mid + 1, end, count - 1)
 
 
-install_wifi(homes[0], homes[-1], M - 2)
+install_wifi(min_home, max_home, M - 2)
 
 print(answer)
